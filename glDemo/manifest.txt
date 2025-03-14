@@ -1,4 +1,4 @@
-CAMERAS 4
+CAMERAS 5
 {
 TYPE: CAMERA
 NAME: CAM1
@@ -74,7 +74,7 @@ AMB: 0.2 0.2 0.2
 DIR: 0.0 1.0 0.0
 }
 
-MODELS 2
+MODELS 3
 {
 TYPE: AI
 NAME: BEAST
@@ -82,11 +82,16 @@ FILE: Assets\\beast\\beast.obj
 }
 {
 TYPE: AI
+NAME: DUCK
+FILE: Assets\\duck\\rubber_duck_toy_4k.obj
+}
+{
+TYPE: AI
 NAME: SPHERE
 FILE: Assets\\gsphere.obj
 }
 
-TEXTURES 5
+TEXTURES 6
 {
 TYPE: FIF_BMP
 NAME: BEAST
@@ -96,6 +101,11 @@ FILE: Assets\\beast\\beast_texture.bmp
 TYPE: FIF_JPEG
 NAME: ROCK
 FILE: Assets\\Textures\\Hodges_G_MountainRock1.jpg
+}
+{
+TYPE: FIF_JPEG
+NAME: DUCK
+FILE: Assets\\duck\\rubber_duck_toy_diff_4k.jpg
 }
 {
 TYPE: FIF_PNG
@@ -135,6 +145,17 @@ SCALE: 1.0 1.0 1.0
 ROTINC: 0.0 0.1 0.001
 MODEL: BEAST
 TEXTURE: BEAST
+SHADER: TEXDIR
+}
+{
+TYPE: EXAMPLE
+NAME: DUCK
+POS: 10.0 10.0 10.0
+ROT: 0.0 0.0 0.0
+SCALE: 1.0 1.0 1.0
+ROTINC: 0.0 0.1 0.001
+MODEL: DUCK
+TEXTURE: DUCK
 SHADER: TEXDIR
 }
 {

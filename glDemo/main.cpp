@@ -37,6 +37,9 @@ vec3 g_DLcolour = vec3(1.0f, 1.0f, 1.0f);
 vec3 g_DLambient = vec3(0.2f, 0.2f, 0.2f);
 
 AIMesh* g_creatureMesh = nullptr;
+AIMesh* g_DuckMesh = nullptr;
+vec3 g_DuckPos = vec3(8.0f, 8.0f, 8.0f);
+float g_DuckRotation = 0.0f;
 vec3 g_beastPos = vec3(2.0f, 0.0f, 0.0f);
 float g_beastRotation = 0.0f;
 AIMesh* g_planetMesh = nullptr;
@@ -142,6 +145,11 @@ int main()
 	g_creatureMesh = new AIMesh(string("Assets\\beast\\beast.obj"));
 	if (g_creatureMesh) {
 		g_creatureMesh->addTexture(string("Assets\\beast\\beast_texture.bmp"), FIF_BMP);
+	}
+
+	g_DuckMesh = new AIMesh(string("Assets\\duck\\rubber_duck_toy_4k.obj"));
+	if (g_DuckMesh) {
+		g_DuckMesh->addTexture(string("Assets\\duck\\rubber_duck_toy_diff_4k.jpg"), FIF_JPEG);
 	}
 
 	g_planetMesh = new AIMesh(string("Assets\\gsphere.obj"));
@@ -252,6 +260,17 @@ void renderScene()
 			g_creatureMesh->render();
 		}
 
+		if (g_DuckMesh) {
+
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_DuckPos) * eulerAngleY<float>(glm::radians<float>(g_DuckRotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_DuckMesh->setupTextures();
+			g_DuckMesh->render();
+		}
+
 		if (g_planetMesh) {
 
 			// Setup transforms
@@ -334,7 +353,9 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 		case GLFW_KEY_SPACE:
 			g_showing++;
 			g_showing = g_showing % g_NumExamples;
-
+			break;
+		case GLFW_KEY_K:
+			g_Scene->NextCamera();
 		default:
 		{
 		}

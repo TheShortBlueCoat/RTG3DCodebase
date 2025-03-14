@@ -71,6 +71,7 @@ Camera* Scene::GetCamera(string _camName)
 		{
 			return (*it);
 		}
+		
 	}
 	printf("Unknown Camera NAME : %s \n", _camName.c_str());
 	assert(0);
@@ -337,5 +338,21 @@ void Scene::Init()
 	for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 	{
 		(*it)->Init(this);
+	}
+}
+
+void Scene::NextCamera()
+{
+	m_useCameraIndex +=1; //goes through cameras
+	if (m_useCameraIndex == m_numCameras)
+	{
+	  m_useCameraIndex = 0;
+	}
+
+	list<Camera*>::iterator it = m_Cameras.begin();
+
+	for (int i = 0; i < m_useCameraIndex; i++); ++it;
+	{
+		m_useCamera = (*it);
 	}
 }
