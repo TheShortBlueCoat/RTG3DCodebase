@@ -343,7 +343,8 @@ void Scene::Init()
 
 void Scene::NextCamera()
 {
-	m_useCameraIndex +=1; //goes through cameras
+	m_useCameraIndex++; //goes through cameras
+	
 	if (m_useCameraIndex == m_numCameras)
 	{
 	  m_useCameraIndex = 0;
@@ -351,8 +352,9 @@ void Scene::NextCamera()
 
 	list<Camera*>::iterator it = m_Cameras.begin();
 
-	for (int i = 0; i < m_useCameraIndex; i++); ++it;
+	for (int i = 0; i < m_useCameraIndex; i++)
 	{
-		m_useCamera = (*it);
+		++it;
 	}
-}
+		m_useCamera = (*it);
+}		

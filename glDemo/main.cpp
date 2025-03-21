@@ -319,6 +319,7 @@ void updateScene()
 	}
 
 	g_Scene->Update(tDelta);
+
 }
 
 
@@ -356,6 +357,7 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			break;
 		case GLFW_KEY_K:
 			g_Scene->NextCamera();
+			break;
 		default:
 		{
 		}
