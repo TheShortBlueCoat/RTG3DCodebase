@@ -357,4 +357,29 @@ void Scene::NextCamera()
 		++it;
 	}
 		m_useCamera = (*it);
-}		
+}
+void Scene::Forward()
+{
+	
+	
+}
+void Scene::Left()
+{
+	
+}
+void Scene::Backward()
+{
+
+}
+void Scene::Right()
+{
+
+}
+void Scene::Up()
+{
+
+}
+void Scene::Down()
+{
+
+}

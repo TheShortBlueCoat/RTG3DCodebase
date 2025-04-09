@@ -37,6 +37,7 @@ void Camera::Init(float _screenWidth, float _screenHeight, Scene* _scene)
 /////////////////////////////////////////////////////////////////////////////////////
 void Camera::Tick(float _dt)
 {
+	//fix this
 	m_viewMatrix = glm::lookAt(m_pos, m_lookAt, vec3(0, 1, 0));
 }
 

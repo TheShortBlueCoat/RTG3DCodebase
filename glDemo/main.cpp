@@ -358,6 +358,24 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 		case GLFW_KEY_K:
 			g_Scene->NextCamera();
 			break;
+		case GLFW_KEY_W:
+			g_Scene->Forward();
+			break;
+		case GLFW_KEY_A:
+			g_Scene->Left();
+			break;
+		case GLFW_KEY_S:
+			g_Scene->Backward();
+			break;
+		case GLFW_KEY_D:
+			g_Scene->Right();
+			break;
+		case GLFW_KEY_Q:
+			g_Scene->Up();
+			break;
+		case GLFW_KEY_E:
+			g_Scene->Down();
+			break;
 		default:
 		{
 		}
@@ -390,6 +408,7 @@ void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos)
 
 		g_prevMouseX = _xpos;
 		g_prevMouseY = _ypos;
+
 	}
 }
 
