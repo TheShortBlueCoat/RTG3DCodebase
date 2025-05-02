@@ -319,7 +319,7 @@ void updateScene()
 	}
 
 	g_Scene->Update(tDelta);
-
+	//update this
 }
 
 
