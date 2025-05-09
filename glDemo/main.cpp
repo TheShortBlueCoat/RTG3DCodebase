@@ -49,7 +49,8 @@ vec3 g_mapPos = vec3(2.0f, -3.0f, 0.0f);
 float g_mapRotation = 0.0f;
 
 AIMesh* g_ghostMesh = nullptr;
-vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
+vec3 g_ghostPos = vec3(2.0f, 0.0f, 0.0f);
+//vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
 float g_ghostRotation = 0.0f;
 
 int g_showing = 0;
@@ -136,6 +137,9 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//
 	// Setup the Example Objects
@@ -311,15 +315,27 @@ void renderScene()
 			g_mapMesh->render();
 		}
 
-		if (g_mapMesh) {
+		if (g_ghostMesh) {
+			// Enable blending for transparency
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			// Set the alpha value for the ghost
+			GLint alphaLocation;
+			Helper::SetUniformLocation(g_texDirLightShader, "alpha", &alphaLocation);
+			glUniform1f(alphaLocation, 0.5f); // Set alpha to 50% transparency
 
 			// Setup transforms
 			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
 			mat4 modelTransform = glm::translate(identity<mat4>(), g_ghostPos) * eulerAngleY<float>(glm::radians<float>(g_ghostRotation));
 			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
 
+			// Render the ghost
 			g_ghostMesh->setupTextures();
 			g_ghostMesh->render();
+
+			// Disable blending after rendering
+			glDisable(GL_BLEND);
 		}
 	}
 	break;
