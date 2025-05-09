@@ -22,7 +22,7 @@ Scene::~Scene()
 }
 
 //tick all my Game Objects, lights and cameras
-void Scene::Update(float _dt, float speed)
+void Scene::Update(float _dt)
 {
 	//update all lights
 	for (list<Light*>::iterator it = m_Lights.begin(); it != m_Lights.end(); it++)
@@ -33,7 +33,7 @@ void Scene::Update(float _dt, float speed)
 	//update all cameras
 	for (list<Camera*>::iterator it = m_Cameras.begin(); it != m_Cameras.end(); it++)
 	{
-		(*it)->Tick(_dt, speed);
+		(*it)->Tick(_dt);
 		//This is where the speed stuff should go to make the camera move
 	}
 

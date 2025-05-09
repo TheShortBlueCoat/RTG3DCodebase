@@ -22,7 +22,7 @@ public:
 	~Scene();
 
 	//tick all GOs
-	void Update(float _dt,float speed);
+	void Update(float _dt);
 
 	//add this GO to my list
 	void AddGameObject(GameObject* _new);

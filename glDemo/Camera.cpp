@@ -35,14 +35,14 @@ void Camera::Init(float _screenWidth, float _screenHeight, Scene* _scene)
 /////////////////////////////////////////////////////////////////////////////////////
 // Update() - 
 /////////////////////////////////////////////////////////////////////////////////////
-void Camera::Tick(float _dt,float speed)
+void Camera::Tick(float _dt)
 {
 	//fix this
-	speed = 1;
+
 
 	m_viewMatrix = glm::lookAt(m_pos, m_lookAt, vec3(0, 1, 0)); //important line
 
-	m_pos += speed;
+	
 }
 
 void Camera::Load(ifstream& _file)

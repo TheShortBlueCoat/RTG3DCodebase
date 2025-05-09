@@ -44,6 +44,14 @@ vec3 g_beastPos = vec3(2.0f, 0.0f, 0.0f);
 float g_beastRotation = 0.0f;
 AIMesh* g_planetMesh = nullptr;
 
+AIMesh* g_mapMesh = nullptr;
+vec3 g_mapPos = vec3(2.0f, -3.0f, 0.0f);
+float g_mapRotation = 0.0f;
+
+AIMesh* g_ghostMesh = nullptr;
+vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
+float g_ghostRotation = 0.0f;
+
 int g_showing = 0;
 int g_NumExamples = 3;
 
@@ -155,6 +163,16 @@ int main()
 	g_planetMesh = new AIMesh(string("Assets\\gsphere.obj"));
 	if (g_planetMesh) {
 		g_planetMesh->addTexture(string("Assets\\Textures\\Hodges_G_MountainRock1.jpg"), FIF_JPEG);
+	}
+
+	g_mapMesh = new AIMesh(string("Assets\\map\\cube1.obj"));
+	if (g_mapMesh) {
+		g_mapMesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_ghostMesh = new AIMesh(string("Assets\\ghost\\ghost.obj"));
+	if (g_ghostMesh) {
+		g_ghostMesh->addTexture(string("Assets\\ghost\\ghost_texture.bmp"), FIF_BMP);
 	}
 
 	//
@@ -280,6 +298,28 @@ void renderScene()
 
 			g_planetMesh->setupTextures();
 			g_planetMesh->render();
+		}
+
+		if (g_mapMesh) {
+
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_mapPos) * eulerAngleY<float>(glm::radians<float>(g_mapRotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_mapMesh->setupTextures();
+			g_mapMesh->render();
+		}
+
+		if (g_mapMesh) {
+
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_ghostPos) * eulerAngleY<float>(glm::radians<float>(g_ghostRotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_ghostMesh->setupTextures();
+			g_ghostMesh->render();
 		}
 	}
 	break;
