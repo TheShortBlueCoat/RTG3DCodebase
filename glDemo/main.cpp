@@ -48,6 +48,22 @@ AIMesh* g_mapMesh = nullptr;
 vec3 g_mapPos = vec3(2.0f, -3.0f, 0.0f);
 float g_mapRotation = 0.0f;
 
+AIMesh* g_wall1Mesh = nullptr;
+vec3 g_wall1Pos = vec3(2.0f, -3.0f, 0.0f);
+float g_wall1Rotation = 0.0f;
+
+AIMesh* g_wall2Mesh = nullptr;
+vec3 g_wall2Pos = vec3(2.0f, -3.0f, 0.0f);
+float g_wall2Rotation = 0.0f;
+
+AIMesh* g_wall3Mesh = nullptr;
+vec3 g_wall3Pos = vec3(2.0f, -3.0f, 0.0f);
+float g_wall3Rotation = 0.0f;
+
+AIMesh* g_wall4Mesh = nullptr;
+vec3 g_wall4Pos = vec3(2.0f, -3.0f, 0.0f);
+float g_wall4Rotation = 0.0f;
+
 AIMesh* g_ghostMesh = nullptr;
 vec3 g_ghostPos = vec3(2.0f, 0.0f, 0.0f);
 //vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
@@ -172,6 +188,26 @@ int main()
 	g_mapMesh = new AIMesh(string("Assets\\map\\cube1.obj"));
 	if (g_mapMesh) {
 		g_mapMesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_wall1Mesh = new AIMesh(string("Assets\\map\\cube1.obj"));
+	if (g_wall1Mesh) {
+		g_wall1Mesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_wall2Mesh = new AIMesh(string("Assets\\map\\cube1.obj"));
+	if (g_wall2Mesh) {
+		g_wall2Mesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_wall3Mesh = new AIMesh(string("Assets\\map\\cube1.obj"));
+	if (g_wall3Mesh) {
+		g_wall3Mesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_wall4Mesh = new AIMesh(string("Assets\\map\\cube1.obj"));
+	if (g_wall4Mesh) {
+		g_wall4Mesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
 	}
 
 	g_ghostMesh = new AIMesh(string("Assets\\ghost\\ghost.obj"));
@@ -315,6 +351,48 @@ void renderScene()
 			g_mapMesh->render();
 		}
 
+		if (g_wall1Mesh) {
+
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_wall1Pos) * eulerAngleY<float>(glm::radians<float>(g_wall1Rotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_wall1Mesh->setupTextures();
+			g_wall1Mesh->render();
+		}
+
+		if (g_wall2Mesh) {
+
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_wall2Pos) * eulerAngleY<float>(glm::radians<float>(g_wall2Rotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_wall2Mesh->setupTextures();
+			g_wall2Mesh->render();
+		}
+
+		if (g_wall3Mesh) {
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_wall3Pos) * eulerAngleY<float>(glm::radians<float>(g_wall3Rotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_wall3Mesh->setupTextures();
+			g_wall3Mesh->render();
+		}
+
+		if (g_wall4Mesh) {
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_wall4Pos) * eulerAngleY<float>(glm::radians<float>(g_wall4Rotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_wall4Mesh->setupTextures();
+			g_wall4Mesh->render();
+		}
+		
 		if (g_ghostMesh) {
 			// Enable blending for transparency
 			glEnable(GL_BLEND);

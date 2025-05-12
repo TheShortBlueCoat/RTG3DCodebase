@@ -74,7 +74,7 @@ AMB: 0.2 0.2 0.2
 DIR: 0.0 1.0 0.0
 }
 
-MODELS 5
+MODELS 9
 {
 TYPE: AI
 NAME: BEAST
@@ -92,6 +92,26 @@ FILE: Assets\\map\\cube1.obj
 }
 {
 TYPE: AI
+NAME: WALL1
+FILE: Assets\\map\\cube1.obj
+}
+{
+TYPE: AI
+NAME: WALL2
+FILE: Assets\\map\\cube1.obj
+}
+{
+TYPE: AI
+NAME: WALL3
+FILE: Assets\\map\\cube1.obj
+}
+{
+TYPE: AI
+NAME: WALL4
+FILE: Assets\\map\\cube1.obj
+}
+{
+TYPE: AI
 NAME: DUCK
 FILE: Assets\\duck\\rubber_duck_toy_4k.obj
 }
@@ -101,7 +121,7 @@ NAME: SPHERE
 FILE: Assets\\gsphere.obj
 }
 
-TEXTURES 8
+TEXTURES 12
 {
 TYPE: FIF_BMP
 NAME: BEAST
@@ -110,6 +130,26 @@ FILE: Assets\\beast\\beast_texture.bmp
 {
 TYPE: FIF_BMP
 NAME: MAP
+FILE: Assets\\map\\map_texture.bmp
+}
+{
+TYPE: FIF_BMP
+NAME: WALL1
+FILE: Assets\\map\\map_texture.bmp
+}
+{
+TYPE: FIF_BMP
+NAME: WALL2
+FILE: Assets\\map\\map_texture.bmp
+}
+{
+TYPE: FIF_BMP
+NAME: WALL3
+FILE: Assets\\map\\map_texture.bmp
+}
+{
+TYPE: FIF_BMP
+NAME: WALL4
 FILE: Assets\\map\\map_texture.bmp
 }
 {
@@ -155,7 +195,7 @@ VERTFILE: Assets\\Shaders\\texture-directional.vert
 FRAGFILE: Assets\\Shaders\\texture-directional.frag
 }
 
-GAMEOBJECTS 5
+GAMEOBJECTS 9
 {
 TYPE: EXAMPLE
 NAME: BEAST
@@ -194,10 +234,54 @@ TYPE: EXAMPLE
 NAME: MAP
 POS: 2.0 -1.0 0.0
 ROT: 0.0 0.0 0.0
-SCALE: 3.0 0.1 3.0
+SCALE: 15.0 0.1 15.0
 ROTINC: 0.0 0.0 0.0
 MODEL: MAP
 TEXTURE: MAP
+SHADER: TEXDIR
+}
+{
+TYPE: EXAMPLE
+NAME: WALL1
+POS: -13.1 -1.0 0.0
+ROT: 0.0 0.0 0.0
+SCALE: 0.1 5.0 15.0
+ROTINC: 0.0 0.0 0.0
+MODEL: WALL1
+TEXTURE: WALL1
+SHADER: TEXDIR
+}
+{
+TYPE: EXAMPLE
+NAME: WALL2
+POS: 2.0 -1.0 -15.1
+ROT: 0.0 0.0 0.0
+SCALE: 15.0 5.0 0.1
+ROTINC: 0.0 0.0 0.0
+MODEL: WALL2
+TEXTURE: WALL2
+SHADER: TEXDIR
+}
+{
+TYPE: EXAMPLE
+NAME: WALL3
+POS: 2.0 -1.0 15.1
+ROT: 0.0 0.0 0.0
+SCALE: 15.0 5.0 0.1
+ROTINC: 0.0 0.0 0.0
+MODEL: WALL3
+TEXTURE: WALL3
+SHADER: TEXDIR
+}
+{
+TYPE: EXAMPLE
+NAME: WALL4
+POS: 17.1 -1.0 0.0
+ROT: 0.0 0.0 0.0
+SCALE: 0.1 5.0 15.0
+ROTINC: 0.0 0.0 0.0
+MODEL: WALL4
+TEXTURE: WALL4
 SHADER: TEXDIR
 }
 {
