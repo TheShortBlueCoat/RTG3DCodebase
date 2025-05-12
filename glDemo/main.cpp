@@ -415,22 +415,22 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			g_Scene->NextCamera();
 			break;
 		case GLFW_KEY_W:
-			g_Scene->Forward();
+			if (g_showing == 2) g_Scene->Forward();
 			break;
 		case GLFW_KEY_A:
-			g_Scene->Left();
+			if (g_showing == 2) g_Scene->Left();
 			break;
 		case GLFW_KEY_S:
-			g_Scene->Backward();
+			if (g_showing == 2) g_Scene->Backward();
 			break;
 		case GLFW_KEY_D:
-			g_Scene->Right();
+			if (g_showing == 2) g_Scene->Right();
 			break;
 		case GLFW_KEY_Q:
-			g_Scene->Up();
+			if (g_showing == 2) g_Scene->Up();
 			break;
 		case GLFW_KEY_E:
-			g_Scene->Down();
+			if (g_showing == 2) g_Scene->Down();
 			break;
 		default:
 		{

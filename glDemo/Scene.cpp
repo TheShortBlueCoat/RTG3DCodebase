@@ -359,27 +359,54 @@ void Scene::NextCamera()
 	}
 		m_useCamera = (*it);
 }
-void Scene::Forward()
-{
-
+// Move camera forward
+void Scene::Forward() {
+	if (!m_useCamera) return;
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	m_useCamera->Move(forward * (float)Movementspeed);
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
 }
-void Scene::Left()
-{
-	
-}
-void Scene::Backward()
-{
 
+// Move camera backward
+void Scene::Backward() {
+	if (!m_useCamera) return;
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	m_useCamera->Move(-forward * (float)Movementspeed);
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
 }
-void Scene::Right()
-{
 
+// Move camera left (strafe)
+void Scene::Left() {
+	if (!m_useCamera) return;
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	glm::vec3 left = glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward));
+	m_useCamera->Move(left * (float)Movementspeed);
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
 }
-void Scene::Up()
-{
 
+// Move camera right (strafe)
+void Scene::Right() {
+	if (!m_useCamera) return;
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0, 1, 0)));
+	m_useCamera->Move(right * (float)Movementspeed);
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
 }
-void Scene::Down()
-{
 
+// Move camera up
+void Scene::Up() {
+	if (!m_useCamera) return;
+	glm::vec3 up(0, 1, 0);
+	m_useCamera->Move(up * (float)Movementspeed);
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
+}
+
+// Move camera down
+void Scene::Down() {
+	if (!m_useCamera) return;
+	glm::vec3 down(0, -1, 0);
+	m_useCamera->Move(down * (float)Movementspeed);
+	glm::vec3 forward = glm::normalize(m_useCamera->GetLookAt() - m_useCamera->GetPos());
+	m_useCamera->SetLookAt(m_useCamera->GetPos() + forward);
 }
