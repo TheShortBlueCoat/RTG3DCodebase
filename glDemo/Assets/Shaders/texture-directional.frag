@@ -10,7 +10,6 @@ uniform vec3 DIRDir;
 uniform vec3 DIRCol;
 uniform vec3 DIRAmb;
 
-
 in SimplePacket {
 	
 	vec3 surfaceWorldPos;

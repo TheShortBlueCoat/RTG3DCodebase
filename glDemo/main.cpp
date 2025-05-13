@@ -64,13 +64,17 @@ AIMesh* g_wall4Mesh = nullptr;
 vec3 g_wall4Pos = vec3(2.0f, -3.0f, 0.0f);
 float g_wall4Rotation = 0.0f;
 
+AIMesh* g_torchMesh = nullptr;
+vec3 g_torchPos = vec3(2.0f, -3.0f, 0.0f);
+float g_torchRotation = 0.0f;
+
 AIMesh* g_ghostMesh = nullptr;
 vec3 g_ghostPos = vec3(2.0f, 0.0f, 0.0f);
 //vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
 float g_ghostRotation = 0.0f;
 
 int g_showing = 0;
-int g_NumExamples = 3;
+int g_NumExamples = 2;
 
 //Global Game Object
 Scene* g_Scene = nullptr;
@@ -208,6 +212,11 @@ int main()
 	g_wall4Mesh = new AIMesh(string("Assets\\map\\cube1.obj"));
 	if (g_wall4Mesh) {
 		g_wall4Mesh->addTexture(string("Assets\\map\\map_texture.bmp"), FIF_BMP);
+	}
+
+	g_torchMesh = new AIMesh(string("Assets\\torch\\torch.obj"));
+	if (g_torchMesh) {
+		g_torchMesh->addTexture(string("Assets\\torch\\torch_texture.bmp"), FIF_BMP);
 	}
 
 	g_ghostMesh = new AIMesh(string("Assets\\ghost\\ghost.obj"));
@@ -392,6 +401,16 @@ void renderScene()
 			g_wall4Mesh->setupTextures();
 			g_wall4Mesh->render();
 		}
+
+		if (g_torchMesh) {
+			// Setup transforms
+			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
+			mat4 modelTransform = glm::translate(identity<mat4>(), g_torchPos) * eulerAngleY<float>(glm::radians<float>(g_torchRotation));
+			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
+
+			g_torchMesh->setupTextures();
+			g_torchMesh->render();
+		}
 		
 		if (g_ghostMesh) {
 			// Enable blending for transparency
@@ -417,24 +436,7 @@ void renderScene()
 		}
 	}
 	break;
-
 	case 1:
-	{
-		// Render cube 
-		glUseProgram(g_flatColourShader);
-		GLint pLocation;
-		Helper::SetUniformLocation(g_flatColourShader, "viewMatrix", &pLocation);
-		glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&cameraView);
-		Helper::SetUniformLocation(g_flatColourShader, "projMatrix", &pLocation);
-		glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&cameraProjection);
-		Helper::SetUniformLocation(g_flatColourShader, "modelMatrix", &pLocation);
-		mat4 modelTransform = glm::translate(identity<mat4>(), vec3(2.0, 0.0, 2.0));
-		glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
-
-		g_cube->render();
-		break;
-	}
-	case 2:
 		g_Scene->Render();
 	}
 
@@ -493,22 +495,22 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			g_Scene->NextCamera();
 			break;
 		case GLFW_KEY_W:
-			if (g_showing == 2) g_Scene->Forward();
+			if (g_showing == 1) g_Scene->Forward();
 			break;
 		case GLFW_KEY_A:
-			if (g_showing == 2) g_Scene->Left();
+			if (g_showing == 1) g_Scene->Left();
 			break;
 		case GLFW_KEY_S:
-			if (g_showing == 2) g_Scene->Backward();
+			if (g_showing == 1) g_Scene->Backward();
 			break;
 		case GLFW_KEY_D:
-			if (g_showing == 2) g_Scene->Right();
+			if (g_showing == 1) g_Scene->Right();
 			break;
 		case GLFW_KEY_Q:
-			if (g_showing == 2) g_Scene->Up();
+			if (g_showing == 1) g_Scene->Up();
 			break;
 		case GLFW_KEY_E:
-			if (g_showing == 2) g_Scene->Down();
+			if (g_showing == 1) g_Scene->Down();
 			break;
 		default:
 		{

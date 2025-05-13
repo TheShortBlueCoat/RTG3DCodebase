@@ -66,6 +66,7 @@ protected:
 	int m_numTextures = 0;
 	int m_numShaders = 0;
 	int Movementspeed = 1;
+
 	std::list<Camera*>    m_Cameras;
 	std::list<Light*>    m_Lights;
 	std::list<Model*>		m_Models;

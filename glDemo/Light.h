@@ -34,6 +34,10 @@ public:
 	vec3 GetAmb() { return m_amb; }
 	vec3 GetPos() { return m_pos; }
 
+	void SetPos(const glm::vec3& pos) { m_pos = pos; }
+	void SetCol(const glm::vec3& col) { m_col = col; }
+	void SetAmb(const glm::vec3& amb) { m_amb = amb; }
+
 	//set my shader values
 	//base version: if name of light is LG
 	//sets up shader values for LGpos LGcol & LGamb

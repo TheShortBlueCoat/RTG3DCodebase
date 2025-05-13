@@ -173,7 +173,6 @@ void Scene::SetShaderUniforms(GLuint _shaderprog)
 	{
 		(*it)->SetRenderValues(_shaderprog);
 	}
-
 }
 
 void Scene::Load(ifstream& _file)
@@ -305,8 +304,6 @@ void Scene::Load(ifstream& _file)
 		_file.ignore(256, '\n');
 		cout << "}\n";
 	}
-
-
 }
 
 void Scene::Init()
@@ -340,6 +337,13 @@ void Scene::Init()
 	{
 		(*it)->Init(this);
 	}
+
+	Light* newLight = LightFactory::makeNewLight("LIGHT");
+	newLight->SetName("YELLOW");
+	newLight->SetPos(glm::vec3(2.0f, 5.0f, -14.0f));
+	newLight->SetCol(glm::vec3(1.0f, 1.0f, 0.0f));
+	newLight->SetAmb(glm::vec3(0.2f, 0.2f, 0.0f));
+	m_Lights.push_back(newLight);
 }
 
 void Scene::NextCamera()
