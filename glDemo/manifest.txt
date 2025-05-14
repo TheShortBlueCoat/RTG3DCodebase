@@ -82,7 +82,7 @@ DIR: 0.0 1.0 0.0
 }
 
 
-MODELS 10
+MODELS 8
 {
 TYPE: AI
 NAME: BEAST
@@ -123,18 +123,8 @@ TYPE: AI
 NAME: TORCH
 FILE: Assets\\torch\\torch.obj
 }
-{
-TYPE: AI
-NAME: DUCK
-FILE: Assets\\duck\\rubber_duck_toy_4k.obj
-}
-{
-TYPE: AI
-NAME: SPHERE
-FILE: Assets\\gsphere.obj
-}
 
-TEXTURES 13
+TEXTURES 11
 {
 TYPE: FIF_BMP
 NAME: BEAST
@@ -176,16 +166,6 @@ NAME: GHOST
 FILE: Assets\\ghost\\ghost_texture.bmp
 }
 {
-TYPE: FIF_JPEG
-NAME: ROCK
-FILE: Assets\\Textures\\Hodges_G_MountainRock1.jpg
-}
-{
-TYPE: FIF_JPEG
-NAME: DUCK
-FILE: Assets\\duck\\rubber_duck_toy_diff_4k.jpg
-}
-{
 TYPE: FIF_PNG
 NAME: SHIP
 FILE: Assets\\Textures\\player1_ship.png
@@ -213,7 +193,7 @@ VERTFILE: Assets\\Shaders\\texture-directional.vert
 FRAGFILE: Assets\\Shaders\\texture-directional.frag
 }
 
-GAMEOBJECTS 10
+GAMEOBJECTS 8
 {
 TYPE: EXAMPLE
 NAME: BEAST
@@ -223,28 +203,6 @@ SCALE: 1.0 1.0 1.0
 ROTINC: 0.0 0.1 0.001
 MODEL: BEAST
 TEXTURE: BEAST
-SHADER: TEXDIR
-}
-{
-TYPE: EXAMPLE
-NAME: DUCK
-POS: 10.0 10.0 10.0
-ROT: 0.0 0.0 0.0
-SCALE: 1.0 1.0 1.0
-ROTINC: 0.0 0.1 0.001
-MODEL: DUCK
-TEXTURE: DUCK
-SHADER: TEXDIR
-}
-{
-TYPE: EXAMPLE
-NAME: PLANET
-POS: 4.0 4.0 4.0
-ROT: 0.0 0.0 0.0 
-SCALE: 1.0 1.0 1.0
-ROTINC: 0.0 0.2 0.0
-MODEL: SPHERE
-TEXTURE: ROCK
 SHADER: TEXDIR
 }
 {

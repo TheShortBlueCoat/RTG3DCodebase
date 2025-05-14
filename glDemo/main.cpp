@@ -37,12 +37,9 @@ vec3 g_DLcolour = vec3(1.0f, 1.0f, 1.0f);
 vec3 g_DLambient = vec3(0.2f, 0.2f, 0.2f);
 
 AIMesh* g_creatureMesh = nullptr;
-AIMesh* g_DuckMesh = nullptr;
-vec3 g_DuckPos = vec3(8.0f, 8.0f, 8.0f);
-float g_DuckRotation = 0.0f;
 vec3 g_beastPos = vec3(2.0f, 0.0f, 0.0f);
 float g_beastRotation = 0.0f;
-AIMesh* g_planetMesh = nullptr;
+
 
 AIMesh* g_mapMesh = nullptr;
 vec3 g_mapPos = vec3(2.0f, -3.0f, 0.0f);
@@ -70,7 +67,6 @@ float g_torchRotation = 0.0f;
 
 AIMesh* g_ghostMesh = nullptr;
 vec3 g_ghostPos = vec3(2.0f, 0.0f, 0.0f);
-//vec3 g_ghostPos = vec3(1.0f, 1.0f, 1.0f);
 float g_ghostRotation = 0.0f;
 
 int g_showing = 0;
@@ -177,16 +173,6 @@ int main()
 	g_creatureMesh = new AIMesh(string("Assets\\beast\\beast.obj"));
 	if (g_creatureMesh) {
 		g_creatureMesh->addTexture(string("Assets\\beast\\beast_texture.bmp"), FIF_BMP);
-	}
-
-	g_DuckMesh = new AIMesh(string("Assets\\duck\\rubber_duck_toy_4k.obj"));
-	if (g_DuckMesh) {
-		g_DuckMesh->addTexture(string("Assets\\duck\\rubber_duck_toy_diff_4k.jpg"), FIF_JPEG);
-	}
-
-	g_planetMesh = new AIMesh(string("Assets\\gsphere.obj"));
-	if (g_planetMesh) {
-		g_planetMesh->addTexture(string("Assets\\Textures\\Hodges_G_MountainRock1.jpg"), FIF_JPEG);
 	}
 
 	g_mapMesh = new AIMesh(string("Assets\\map\\cube1.obj"));
@@ -325,28 +311,6 @@ void renderScene()
 
 			g_creatureMesh->setupTextures();
 			g_creatureMesh->render();
-		}
-
-		if (g_DuckMesh) {
-
-			// Setup transforms
-			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
-			mat4 modelTransform = glm::translate(identity<mat4>(), g_DuckPos) * eulerAngleY<float>(glm::radians<float>(g_DuckRotation));
-			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
-
-			g_DuckMesh->setupTextures();
-			g_DuckMesh->render();
-		}
-
-		if (g_planetMesh) {
-
-			// Setup transforms
-			Helper::SetUniformLocation(g_texDirLightShader, "modelMatrix", &pLocation);
-			mat4 modelTransform = glm::translate(identity<mat4>(), vec3(4.0, 4.0, 4.0));
-			glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
-
-			g_planetMesh->setupTextures();
-			g_planetMesh->render();
 		}
 
 		if (g_mapMesh) {
